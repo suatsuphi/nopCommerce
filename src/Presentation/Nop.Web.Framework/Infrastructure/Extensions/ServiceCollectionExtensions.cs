@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
@@ -314,6 +315,9 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
                 //here we set the locale name as the message, we'll replace it with the actual one later when not-null validation failed
                 options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(_ => NopValidationDefaults.NotNullValidationLocaleName);
             });
+
+            //we'll use the previous behavior until drop Kendo UI
+            mvcBuilder.AddViewOptions(options => options.HtmlHelperOptions.FormInputRenderMode = FormInputRenderMode.AlwaysUseCurrentCulture);
 
             //add fluent validation
             services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();

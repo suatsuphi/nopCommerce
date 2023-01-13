@@ -1,8 +1,16 @@
 @model DateTime?
-<input id="@Html.IdForModel()" name="@Html.NameForModel()" value="@(Model > DateTime.MinValue || Model.HasValue ? Model.Value.ToString() : null)" />
+@{
+    var culture = CultureInfo.CurrentCulture;
+    var dateFormat = $"{culture.DateTimeFormat.ShortDatePattern} {culture.DateTimeFormat.ShortTimePattern}";
+}
+<input asp-for="@Model" />
 <script>
     $(document).ready(function () {
+        var value = "@Model?.ToString(dateFormat, culture)";
         $("#@Html.IdForModel()").kendoDateTimePicker({
+            value: value,
+            format: "@dateFormat",
+            min: new Date(kendo.parseDate(value || new Date()).getYear() - 100, 1, 1),
             popup: {
                 position: "bottom right",
                 origin: "top right"
