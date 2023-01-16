@@ -316,9 +316,6 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
                 options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(_ => NopValidationDefaults.NotNullValidationLocaleName);
             });
 
-            //we'll use the previous behavior until drop Kendo UI
-            mvcBuilder.AddViewOptions(options => options.HtmlHelperOptions.FormInputRenderMode = FormInputRenderMode.AlwaysUseCurrentCulture);
-
             //add fluent validation
             services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 
