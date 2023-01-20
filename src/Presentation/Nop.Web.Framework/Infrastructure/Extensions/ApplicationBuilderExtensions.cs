@@ -73,7 +73,7 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
                 //update nopCommerce core and db
                 var migrationManager = engine.Resolve<IMigrationManager>();
                 var assembly = Assembly.GetAssembly(typeof(ApplicationBuilderExtensions));
-                migrationManager.ApplyUpMigrations(assembly, MigrationProcessType.Update);
+                migrationManager.ApplyUpMigrations(assembly, MigrationProcessType.Installation);
                 assembly = Assembly.GetAssembly(typeof(IMigrationManager));
                 migrationManager.ApplyUpMigrations(assembly, MigrationProcessType.Update);
 
